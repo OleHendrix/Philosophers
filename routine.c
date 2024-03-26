@@ -28,22 +28,6 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->rightfork->fork);
 }
 
-void	ft_eat_even(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->leftfork->fork);
-	ft_action(philo->id, "has taken a fork", philo->data);
-	pthread_mutex_lock(&philo->rightfork->fork);
-	ft_action(philo->id, "has taken a fork", philo->data);
-	write_long(&philo->updatemeal, &philo->lastmealtime, get_time());
-	philo->mealscount++;
-	ft_action(philo->id, "is eating", philo->data);
-	ft_usleep(philo->timetoeat);
-	if (philo->mealscount == philo->limitmeals)
-		write_bool(&philo->updatemeal, &philo->full, true);
-	pthread_mutex_unlock(&philo->rightfork->fork);
-	pthread_mutex_unlock(&philo->leftfork->fork);
-}
-
 void	*routine(void *philo2)
 {
 	t_philo	*philo;
