@@ -57,19 +57,6 @@ int	ft_initthreads(t_data *data)
 	write_bool(&data->datamutex, &data->ready, true);
 	return ((bool)ft_jointhreads(data, observer));
 }
-void	printforks(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->philocount)
-	{
-		printf("Philo %d\n", data->philosophers[i].id);
-		printf("First Fork: %d\n", data->philosophers[i].rightfork->forkid);
-		printf("Second Fork: %d\n\n", data->philosophers[i].leftfork->forkid);
-		i++;
-	}
-}
 
 int	ft_init(t_data *data, int argc, char **argv)
 {
@@ -83,7 +70,6 @@ int	ft_init(t_data *data, int argc, char **argv)
 		return (1);
 	if (ft_initthreads(data))
 		return (2);
-	// printforks(data);
 	return (0);
 }
 
